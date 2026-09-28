@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --cor-fundo: #080102;
+    --cor-principal: #140507;
+    --cor-secundaria: #26090d;
+    --cor-destaque: #ff2a4b;
+    --cor-destaque-hover: #ff526d;
+    --cor-texto: #fff0f2;
+    --cor-borda: #4a1118;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+    
+    /* Fundo com Holofotes nas pontas + Grelha tática */
+    background-image: 
+        radial-gradient(circle at 10% 10%, rgba(255, 42, 75, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(255, 42, 75, 0.2) 0%, transparent 40%),
+        linear-gradient(rgba(255, 42, 75, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 42, 75, 0.07) 1px, transparent 1px);
+        
+    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Círculo do meio-campo movido para o TOPO da tela como um arco iluminado */
+body::before {
+    content: "";
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    top: -350px; /* Posiciona a metade do círculo no topo */
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 42, 75, 0.2);
+    background: radial-gradient(circle, rgba(255, 42, 75, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: pulsarTopo 5s infinite alternate ease-in-out;
+}
+
+/* Linha tática horizontal cruzando a tela na parte superior */
+body::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 42, 75, 0.3), transparent);
+    top: 100px;
+    left: 0;
+    z-index: 0;
+}
+
+/* Animação suave do brilho do topo */
+@keyframes pulsarTopo {
+    0% { transform: translateX(-50%) scale(0.95); opacity: 0.6; }
+    100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+}
+
+/* Bloco Principal */
+.caixa-principal {
+    position: relative;
+    z-index: 1;
+    background-color: var(--cor-principal);
+    width: 95%;
+    max-width: 800px;
+    text-align: center;
+    padding: 45px;
+    border-radius: 20px;
+    border: 1px solid var(--cor-borda);
+    box-shadow: 0 0 40px rgba(255, 42, 75, 0.25), inset 0 0 15px rgba(255, 42, 75, 0.05);
+    backdrop-filter: blur(8px);
+}
+
+h1 {
+    color: var(--cor-destaque);
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 15px rgba(255, 42, 75, 0.6);
+}
+
+.caixa-perguntas {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: var(--cor-texto);
+}
+
+.caixa-alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 18px 24px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-align: center;
+}
+
+button:hover {
+    background-color: var(--cor-destaque);
+    color: #ffffff;
+    border-color: var(--cor-destaque-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 42, 75, 0.45);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+.caixa-resultado {
+    display: none;
+    margin-top: 20px;
+}
+
+.caixa-resultado.mostrar {
+    display: block;
+}
+
+.texto-resultado {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    color: var(--cor-texto);
+}
+
+.novamente-btn {
+    margin-top: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
